@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Restaurante</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>DevRestaurant 🍽️</h1>
+        <nav>
+            <button class="nav-btn active" onclick="alternarAba('cliente')">Área do Cliente</button>
+            <button class="nav-btn" onclick="alternarAba('admin')">Área Admin</button>
+        </nav>
+    </header>
+
+    <main class="container">
+        
+        <section id="aba-cliente" class="aba-conteudo active">
+            <h2>Nosso Cardápio</h2>
+            
+            <div id="categorias-cliente" class="categorias-container"></div>
+
+            <div id="cardapio-grid" class="produtos-grid"></div>
+
+            <aside class="carrinho-container">
+                <h3>🛒 Seu Carrinho</h3>
+                <ul id="itens-carrinho"></ul>
+                <div class="carrinho-total">
+                    <strong>Total: R$ <span id="total-carrinho">0.00</span></strong>
+                </div>
+                <div class="campo-grupo">
+                    <label for="selecionar-mesa">Sua Mesa:</label>
+                    <select id="selecionar-mesa">
+                        <option value="1">Mesa 1</option>
+                        <option value="2">Mesa 2</option>
+                        <option value="3">Mesa 3</option>
+                    </select>
+                </div>
+                <button class="btn-sucesso" onclick="finalizarPedido()">Finalizar Pedido</button>
+            </aside>
+        </section>
+
+        <section id="aba-admin" class="aba-conteudo">
+            <h2>Painel Administrativo</h2>
+            
+            <div class="admin-grid">
+                <div class="admin-card">
+                    <h3>➕ Cadastrar Produto</h3>
+                    <form id="form-produto" onsubmit="salvarProduto(event)">
+                        <input type="text" id="prod-nome" placeholder="Nome do Produto" required>
+                        <input type="number" id="prod-preco" step="0.01" placeholder="Preço (Ex: 25.50)" required>
+                        <select id="prod-categoria" required>
+                            </select>
+                        <button type="submit">Adicionar Produto</button>
+                    </form>
+
+                    <h3>📁 Cadastrar Categoria</h3>
+                    <form id="form-categoria" onsubmit="salvarCategoria(event)">
+                        <input type="text" id="cat-nome" placeholder="Nome da Categoria" required>
+                        <button type="submit">Adicionar Categoria</button>
+                    </form>
+                </div>
+
+                <div class="admin-card">
+                    <h3>📋 Pedidos Ativos</h3>
+                    <div id="lista-pedidos"></div>
+
+                    <h3>🪑 Controle de Mesas</h3>
+                    <div id="status-mesas" class="mesas-grid"></div>
+
+                    <h3>📊 Relatório Básico</h3>
+                    <div class="relatorio-box">
+                        <p>Total de Vendas: <strong>R$ <span id="faturamento-total">0.00</span></strong></p>
+                        <p>Pedidos Finalizados: <strong><span id="qtd-pedidos">0</span></strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="modal-resumo" class="modal">
+        <div class="modal-conteudo">
+            <h3>📝 Resumo do Pedido</h3>
+            <div id="corpo-resumo"></div>
+            <div class="modal-botoes">
+                <button class="btn-erro" onclick="fecharModal()">Cancelar</button>
+                <button class="btn-sucesso" onclick="confirmarPedido()">Confirmar e Enviar para Cozinha</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
