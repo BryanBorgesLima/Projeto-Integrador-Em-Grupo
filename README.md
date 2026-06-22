@@ -1,2 +1,2 @@
 # Projeto-Integrador-Em-Grupo
-sé arquivos sérios
+só arquivos sérios
