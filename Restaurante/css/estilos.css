@@ -1,0 +1,556 @@
+/* estilos.css
+   Folha de estilos compartilhada pelas páginas do CLIENTE:
+   index.html, cardapio.html, carrinho.html, resumo.html e confirmacao.html */
+
+/* ===== Variáveis de cor (fica fácil mudar a paleta inteira aqui) ===== */
+:root {
+  --cor-fundo: #faf7f2;
+  --cor-fundo-alt: #f0ebe0;
+  --cor-principal: #1b2a4a;
+  --cor-principal-clara: #2c3e63;
+  --cor-destaque: #c9963d;
+  --cor-destaque-escuro: #a87826;
+  --cor-texto: #2c2c2c;
+  --cor-texto-claro: #6b6b6b;
+  --cor-branco: #ffffff;
+  --cor-sucesso: #2e7d32;
+  --cor-perigo: #c62828;
+  --cor-alerta: #b8860b;
+  --raio: 10px;
+  --sombra: 0 2px 10px rgba(0, 0, 0, 0.08);
+  /* Estas duas variáveis existem separadas de --cor-branco/--cor-principal
+     porque aquelas duas têm "dois empregos" (--cor-branco também é o texto
+     do cabeçalho navy; --cor-principal também é o fundo do cabeçalho navy).
+     No tema escuro só estas duas variáveis abaixo mudam de valor. */
+  --cor-superficie: var(--cor-branco);
+  --cor-titulo: var(--cor-principal);
+  color-scheme: light;
+}
+
+/* ===== Tema escuro =====
+   Ativado quando js/tema.js coloca data-tema="escuro" na tag <html>.
+   --cor-principal e --cor-branco continuam os mesmos: o cabeçalho/rodapé
+   navy já funciona bem como "escuro" nos dois temas. */
+:root[data-tema="escuro"] {
+  --cor-fundo: #11151f;
+  --cor-fundo-alt: #1a2030;
+  --cor-superficie: #1f2738;
+  --cor-texto: #e9e6df;
+  --cor-texto-claro: #a3a8b5;
+  --cor-titulo: #f0dcae;
+  --cor-destaque-escuro: #e0b563;
+  color-scheme: dark;
+}
+
+/* ===== Transição animada entre páginas =====
+   O navegador anima sozinho a troca de uma página para outra
+   (fade da página antiga saindo e da nova entrando). Não precisa
+   de JavaScript nenhum - é só esta regra de CSS.
+   Hoje funciona em navegadores baseados em Chromium (Chrome/Edge). */
+@view-transition {
+  navigation: auto;
+}
+
+/* ===== Reset básico ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  line-height: 1.5;
+  /* Truque do "rodapé colado embaixo": o body vira uma coluna flexível
+     com altura mínima igual à tela toda, e o rodapé (margin-top: auto,
+     lá embaixo no CSS) é empurrado para o final mesmo com pouco conteúdo */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Pessoas que configuraram o sistema para reduzir movimento
+   não veem as animações (acessibilidade) */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.2rem;
+}
+
+/* ===== Cabeçalho ===== */
+.cabecalho {
+  background-color: var(--cor-principal);
+  color: var(--cor-branco);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: var(--sombra);
+}
+
+.cabecalho .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.logo span {
+  color: var(--cor-destaque);
+}
+
+.nav-cliente {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-cliente a {
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-cliente a:hover {
+  color: var(--cor-destaque);
+}
+
+/* Destaca o link da página em que o usuário está agora */
+.nav-cliente a.ativo {
+  color: var(--cor-destaque);
+  border-bottom: 2px solid var(--cor-destaque);
+}
+
+.link-carrinho {
+  position: relative;
+  font-size: 1.4rem;
+}
+
+.contador-carrinho {
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  background-color: var(--cor-destaque);
+  color: var(--cor-principal);
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Animação rápida de "pulso" no carrinho quando um item é adicionado */
+@keyframes pulsarCarrinho {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.35);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.contador-carrinho.pulso {
+  animation: pulsarCarrinho 0.35s ease;
+}
+
+/* Botão de alternar tema claro/escuro (ver js/tema.js) */
+.botao-tema {
+  background: none;
+  border: 1px solid var(--cor-branco);
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--cor-branco);
+}
+
+/* ===== Botões ===== */
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.6rem;
+  border-radius: var(--raio);
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.btn-primario {
+  background-color: var(--cor-destaque);
+  color: var(--cor-principal);
+}
+
+.btn-secundario {
+  background-color: transparent;
+  color: var(--cor-branco);
+  border: 2px solid var(--cor-branco);
+}
+
+.btn-grande {
+  width: 100%;
+  padding: 0.9rem;
+  font-size: 1.1rem;
+}
+
+.btn-pequeno {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+}
+
+.btn-perigo {
+  background-color: var(--cor-perigo);
+  color: var(--cor-branco);
+}
+
+/* ===== Animação de entrada (fade-in) ===== */
+@keyframes apareceSubindo {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Seções e títulos ===== */
+.secao {
+  padding: 3rem 0;
+  animation: apareceSubindo 0.5s ease both;
+}
+
+.titulo-secao {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  color: var(--cor-titulo);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.subtitulo-secao {
+  text-align: center;
+  color: var(--cor-texto-claro);
+  margin-bottom: 2rem;
+}
+
+/* ===== Abas de categoria ===== */
+.abas-categorias {
+  display: flex;
+  gap: 0.7rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.aba-categoria {
+  flex: 0 0 auto;
+  padding: 0.6rem 1.2rem;
+  border-radius: 30px;
+  background-color: var(--cor-superficie);
+  border: 1px solid var(--cor-fundo-alt);
+  cursor: pointer;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.aba-categoria:hover {
+  background-color: var(--cor-fundo-alt);
+}
+
+.aba-categoria.ativa {
+  background-color: var(--cor-principal);
+  color: var(--cor-branco);
+  border-color: var(--cor-principal);
+}
+
+/* ===== Grid e cards de produto ===== */
+.grid-produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.3rem;
+}
+
+.cartao-produto {
+  background-color: var(--cor-superficie);
+  border-radius: var(--raio);
+  padding: 1.2rem;
+  box-shadow: var(--sombra);
+  transition: box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.cartao-produto:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.emoji-produto {
+  font-size: 2.6rem;
+  text-align: center;
+  margin-bottom: 0.7rem;
+}
+
+.nome-produto {
+  font-weight: 700;
+  color: var(--cor-titulo);
+  margin-bottom: 0.3rem;
+}
+
+.descricao-produto {
+  font-size: 0.85rem;
+  color: var(--cor-texto-claro);
+  flex-grow: 1;
+  margin-bottom: 0.8rem;
+}
+
+.rodape-produto {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.preco-produto {
+  font-weight: 700;
+  color: var(--cor-destaque-escuro);
+  font-size: 1.1rem;
+}
+
+/* ===== Carrinho ===== */
+.item-carrinho {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--cor-superficie);
+  border-radius: var(--raio);
+  padding: 1rem;
+  margin-bottom: 0.8rem;
+  box-shadow: var(--sombra);
+}
+
+.item-carrinho .emoji-produto {
+  margin-bottom: 0;
+  font-size: 2rem;
+}
+
+.info-item-carrinho {
+  flex-grow: 1;
+}
+
+.controle-quantidade {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.controle-quantidade button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--cor-fundo-alt);
+  background-color: var(--cor-fundo);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.subtotal-item {
+  min-width: 80px;
+  text-align: right;
+  font-weight: 700;
+}
+
+.remover-item {
+  color: var(--cor-perigo);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.resumo-total {
+  background-color: var(--cor-superficie);
+  border-radius: var(--raio);
+  padding: 1.2rem;
+  box-shadow: var(--sombra);
+  margin-top: 1.5rem;
+}
+
+.linha-total {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.linha-total.total-geral {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--cor-titulo);
+  border-top: 1px solid var(--cor-fundo-alt);
+  padding-top: 0.7rem;
+  margin-top: 0.7rem;
+}
+
+.mensagem-vazio {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--cor-texto-claro);
+}
+
+/* ===== Formulários ===== */
+.grupo-campo {
+  margin-bottom: 1.1rem;
+}
+
+.grupo-campo label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--cor-titulo);
+}
+
+.grupo-campo input,
+.grupo-campo textarea,
+.grupo-campo select {
+  width: 100%;
+  padding: 0.7rem;
+  border-radius: var(--raio);
+  border: 1px solid var(--cor-fundo-alt);
+  background-color: var(--cor-superficie);
+  color: var(--cor-texto);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.opcoes-tipo-pedido {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.opcao-tipo-pedido {
+  flex: 1;
+  padding: 1rem;
+  border: 2px solid var(--cor-fundo-alt);
+  border-radius: var(--raio);
+  text-align: center;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.opcao-tipo-pedido.selecionada {
+  border-color: var(--cor-destaque);
+  background-color: var(--cor-fundo-alt);
+}
+
+.cartao-formulario {
+  background-color: var(--cor-superficie);
+  border-radius: var(--raio);
+  padding: 1.5rem;
+  box-shadow: var(--sombra);
+}
+
+/* ===== Rodapé ===== */
+.rodape {
+  background-color: var(--cor-principal);
+  color: var(--cor-branco);
+  text-align: center;
+  padding: 1.5rem 0;
+  margin-top: auto;
+  /* empurra o rodapé para o final da tela */
+}
+
+/* ===== Toast (avisinho que aparece e desaparece sozinho) ===== */
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background-color: var(--cor-principal);
+  color: var(--cor-branco);
+  padding: 0.9rem 1.4rem;
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  font-weight: 600;
+  transform: translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  z-index: 50;
+}
+
+.toast.visivel {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ===== Responsivo ===== */
+@media (max-width: 640px) {
+  .cabecalho .container {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .nav-cliente {
+    gap: 1rem;
+  }
+
+  .item-carrinho {
+    flex-wrap: wrap;
+  }
+
+  .opcoes-tipo-pedido {
+    flex-direction: column;
+  }
+}
+
+::view-transition-group(*) {
+  animation-duration: 0.3s;
+}
