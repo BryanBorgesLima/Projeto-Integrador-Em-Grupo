@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bella Tavola - Resumo do Pedido</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/estilos.css">
+  <link rel="stylesheet" href="../css/paginas.css">
+</head>
+<body class="pagina-resumo">
+
+  <header class="cabecalho">
+    <div class="container">
+      <a href="../index.html" class="logo">Bella <span>Tavola</span></a>
+      <nav class="nav-cliente">
+        <a href="../index.html">Início</a>
+        <a href="cardapio.html">Cardápio</a>
+        <a href="carrinho.html" class="link-carrinho">
+          🛒
+          <span id="contador-carrinho" class="contador-carrinho">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="secao">
+    <div class="container">
+      <h2 class="titulo-secao">Resumo do Pedido</h2>
+      <p class="subtitulo-secao">Confira os itens e informe seus dados para finalizar</p>
+
+      <div class="grade-resumo">
+
+        <!-- Coluna da esquerda: itens do pedido (somente leitura) -->
+        <div>
+          <div id="lista-itens-resumo"></div>
+          <div class="resumo-total">
+            <div class="linha-total total-geral">
+              <span>Total</span>
+              <span id="valor-total-resumo">R$ 0,00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coluna da direita: formulário com dados do cliente -->
+        <div class="cartao-formulario">
+          <form id="form-resumo" onsubmit="confirmarPedido(event)">
+
+            <div class="grupo-campo">
+              <label for="campo-nome">Nome completo</label>
+              <input type="text" id="campo-nome" required>
+            </div>
+
+            <div class="grupo-campo">
+              <label for="campo-telefone">Telefone</label>
+              <input type="tel" id="campo-telefone" placeholder="(11) 99999-0000" required>
+            </div>
+
+            <div class="grupo-campo">
+              <label>Como deseja receber o pedido?</label>
+              <div class="opcoes-tipo-pedido">
+                <div id="opcao-mesa" class="opcao-tipo-pedido selecionada" onclick="selecionarTipoPedido('mesa')">
+                  🍽️ Retirar na Mesa
+                </div>
+                <div id="opcao-delivery" class="opcao-tipo-pedido" onclick="selecionarTipoPedido('delivery')">
+                  🛵 Delivery
+                </div>
+              </div>
+            </div>
+
+            <!-- Campos que só aparecem se o tipo for "mesa" -->
+            <div id="campos-mesa" class="campo-condicional visivel">
+              <div class="grupo-campo">
+                <label for="campo-mesa">Escolha a mesa</label>
+                <select id="campo-mesa"></select>
+              </div>
+            </div>
+
+            <!-- Campos que só aparecem se o tipo for "delivery" -->
+            <div id="campos-delivery" class="campo-condicional">
+              <div class="grupo-campo">
+                <label for="campo-endereco">Endereço de entrega</label>
+                <textarea id="campo-endereco" rows="3" placeholder="Rua, número, bairro"></textarea>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primario btn-grande">Confirmar Pedido</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="rodape">
+    <p>Bella Tavola &copy; 2026 - Trabalho escolar de HTML, CSS e JavaScript</p>
+  </footer>
+
+  <script src="../js/dados.js"></script>
+  <script src="../js/armazenamento.js"></script>
+  <script src="../js/resumo.js"></script>
+</body>
+</html>

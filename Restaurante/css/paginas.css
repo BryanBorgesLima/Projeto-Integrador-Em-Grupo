@@ -1,0 +1,91 @@
+/* paginas.css
+   Ajustes específicos de cada página do cliente.
+   Usamos uma classe no <body> (ex: body.pagina-inicio) para isolar
+   o estilo de cada página sem precisar criar um arquivo CSS para cada uma. */
+
+/* ----- index.html (página inicial) ----- */
+.pagina-inicio .hero {
+  background: linear-gradient(135deg, var(--cor-principal), var(--cor-principal-clara));
+  color: var(--cor-branco);
+  padding: 4rem 0;
+  text-align: center;
+  animation: apareceSubindo 0.6s ease both;
+}
+
+.pagina-inicio .hero h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  margin-bottom: 1rem;
+}
+
+.pagina-inicio .hero p {
+  font-size: 1.1rem;
+  color: var(--cor-fundo-alt);
+  margin-bottom: 1.8rem;
+}
+
+.pagina-inicio .grupo-botoes-hero {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.pagina-inicio .destaques {
+  margin-top: -2rem;
+}
+
+/* ----- confirmacao.html ----- */
+.pagina-confirmacao .cartao-confirmacao {
+  max-width: 500px;
+  margin: 3rem auto;
+  background-color: var(--cor-branco);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: 2.5rem;
+  text-align: center;
+}
+
+.pagina-confirmacao .icone-sucesso {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.pagina-confirmacao .numero-pedido {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--cor-destaque-escuro);
+  margin: 0.8rem 0 1.5rem;
+}
+
+.pagina-confirmacao .lista-itens-confirmacao {
+  text-align: left;
+  margin: 1.2rem 0;
+}
+
+.pagina-confirmacao .lista-itens-confirmacao li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--cor-fundo-alt);
+}
+
+/* ----- resumo.html ----- */
+.pagina-resumo .grade-resumo {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .pagina-resumo .grade-resumo {
+    grid-template-columns: 1fr;
+  }
+}
+
+.campo-condicional {
+  display: none;
+}
+
+.campo-condicional.visivel {
+  display: block;
+}

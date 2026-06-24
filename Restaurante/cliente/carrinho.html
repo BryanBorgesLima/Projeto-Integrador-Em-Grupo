@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bella Tavola - Carrinho</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/estilos.css">
+  <link rel="stylesheet" href="../css/paginas.css">
+</head>
+<body class="pagina-carrinho">
+
+  <header class="cabecalho">
+    <div class="container">
+      <a href="../index.html" class="logo">Bella <span>Tavola</span></a>
+      <nav class="nav-cliente">
+        <a href="../index.html">Início</a>
+        <a href="cardapio.html">Cardápio</a>
+        <a href="carrinho.html" class="link-carrinho ativo">
+          🛒
+          <span id="contador-carrinho" class="contador-carrinho">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="secao">
+    <div class="container">
+      <h2 class="titulo-secao">Seu Carrinho</h2>
+      <p class="subtitulo-secao">Confira os itens antes de continuar</p>
+
+      <!-- Lista de itens do carrinho, montada pelo carrinho.js -->
+      <div id="lista-carrinho"></div>
+
+      <!-- Total e botão de continuar, escondidos se o carrinho estiver vazio -->
+      <div id="bloco-total" class="resumo-total" style="display:none;">
+        <div class="linha-total total-geral">
+          <span>Total</span>
+          <span id="valor-total">R$ 0,00</span>
+        </div>
+        <a href="resumo.html" class="btn btn-primario btn-grande" style="margin-top:1rem;">Continuar para o Resumo</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="rodape">
+    <p>Bella Tavola &copy; 2026 - Trabalho escolar de HTML, CSS e JavaScript</p>
+  </footer>
+
+  <script src="../js/dados.js"></script>
+  <script src="../js/armazenamento.js"></script>
+  <script src="../js/carrinho.js"></script>
+</body>
+</html>
