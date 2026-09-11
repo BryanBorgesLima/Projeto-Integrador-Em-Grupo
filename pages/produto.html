@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Redirecionando...</title>
+</head>
+<body>
+  <script>
+    var params = new URLSearchParams(window.location.search);
+    var id = parseInt(params.get("id"), 10) || 0;
+    window.location.replace("menu.html" + (id ? "?open=" + id : ""));
+  </script>
+</body>
+</html>
