@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trattoria Liedlke - Sabor em Mesa</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="welcome-screen">
+    <div class="welcome-logo">
+      <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 2v7a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V2"/><path d="M9 11v11"/><path d="M17 2c-1.5 0-3 1.5-3 4v3.5c0 1 .5 1.5 1.5 1.5H17"/><path d="M17 2v20"/></svg>
+    </div>
+    <h1>Trattoria Liedlke</h1>
+    <p class="welcome-sub">Sabor em Mesa</p>
+    <p class="tagline">Sabor de verdade, feito na hora — peça direto da sua mesa.</p>
+    <a href="pages/menu.php" class="btn btn-primary" id="orderBtn">Fazer Pedido</a>
+    <p class="welcome-terms">Ao continuar, você concorda com os Termos de Uso.</p>
+    <div class="welcome-mesa-note" id="mesaNote" style="display:none;"></div>
+  </div>
+
+  <script>
+    // Se o link veio de um QR code de mesa (ex: index.html?mesa=4), repassa o número
+    // pro cardápio e mostra uma confirmação amigável antes de continuar.
+    const params = new URLSearchParams(window.location.search);
+    const mesa = params.get("mesa");
+    const btn = document.getElementById("orderBtn");
+    if (mesa) {
+      btn.href = "pages/menu.php?mesa=" + encodeURIComponent(mesa);
+      const note = document.getElementById("mesaNote");
+      note.style.display = "inline-block";
+      note.textContent = "Mesa " + String(mesa).padStart(2, "0") + " identificada";
+    }
+  </script>
+</body>
+</html>

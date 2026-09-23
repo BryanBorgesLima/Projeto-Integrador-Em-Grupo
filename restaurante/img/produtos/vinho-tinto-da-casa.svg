@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Vinho Tinto da Casa"><title>Vinho Tinto da Casa</title><defs><pattern id="g" width="48" height="48" patternUnits="userSpaceOnUse">
+<rect width="48" height="48" fill="#F7F2EA"/>
+<rect width="24" height="48" fill="#3E7C8C" opacity=".28"/>
+<rect width="48" height="24" fill="#3E7C8C" opacity=".28"/>
+</pattern></defs>
+<rect width="800" height="600" fill="#EFE8DC"/>
+<rect y="0" width="800" height="360" fill="#F4EEE4"/>
+<rect y="380" width="800" height="220" fill="url(#g)"/>
+<rect y="376" width="800" height="8" fill="#000" opacity=".05"/><ellipse cx="408" cy="452" rx="70" ry="14" fill="#2B2A28" opacity=".14"/><circle cx="560" cy="420" r="15" fill="#5B2A4A"/><circle cx="555" cy="415" r="4" fill="#9B6A8A"/><circle cx="585" cy="428" r="15" fill="#5B2A4A"/><circle cx="580" cy="423" r="4" fill="#9B6A8A"/><circle cx="572" cy="402" r="15" fill="#5B2A4A"/><circle cx="567" cy="397" r="4" fill="#9B6A8A"/><circle cx="598" cy="408" r="15" fill="#5B2A4A"/><circle cx="593" cy="403" r="4" fill="#9B6A8A"/><circle cx="548" cy="402" r="15" fill="#5B2A4A"/><circle cx="543" cy="397" r="4" fill="#9B6A8A"/><circle cx="585" cy="385" r="15" fill="#5B2A4A"/><circle cx="580" cy="380" r="4" fill="#9B6A8A"/><circle cx="560" cy="382" r="15" fill="#5B2A4A"/><circle cx="555" cy="377" r="4" fill="#9B6A8A"/><g transform="translate(575.0,360.0) rotate(-60) scale(1.1)">
+<path d="M0,-26 C17,-15 17,13 0,26 C-17,13 -17,-15 0,-26Z" fill="#6E9A45"/>
+<path d="M0,-22 L0,22" stroke="#557A34" stroke-width="2" stroke-linecap="round"/>
+<path d="M0,-26 C8,-18 9,-8 7,-2" stroke="#fff" stroke-width="2" fill="none" opacity=".25"/></g><path d="M332,112 C326,205 350,264 400,272 C450,264 474,205 468,112Z" fill="#FFFFFF" opacity=".35"/><path d="M335,168 C338,226 360,262 400,266 C440,262 462,226 465,168Z" fill="#7A1E2C"/><ellipse cx="400" cy="168" rx="65" ry="10" fill="#9B2F40"/><path d="M332,112 C326,205 350,264 400,272 C450,264 474,205 468,112" fill="none" stroke="#FFFFFF" stroke-width="4"/><ellipse cx="400" cy="112" rx="68" ry="10" fill="#FFFFFF" fill-opacity=".25" stroke="#FFFFFF" stroke-width="4"/><path d="M396,272 L396,430 L404,430 L404,272Z" fill="#FFFFFF" opacity=".85"/><ellipse cx="400" cy="440" rx="62" ry="12" fill="#FFFFFF" opacity=".85"/><path d="M348,130 C344,172 350,212 368,242" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" opacity=".7"/></svg>
